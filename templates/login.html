@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auto updating intrusion detection system for vehicular network | Login</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a4a6d;
+      --accent-blue: #4361ee;
+      --accent-purple: #7209b7;
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+      --shadow-md: 0 10px 40px rgba(0, 0, 0, 0.1);
+      --border-radius: 20px;
+      --border-radius-sm: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: var(--text-primary);
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Modern Navigation */
+    nav {
+      width: 90%;
+      max-width: 1200px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--border-radius);
+      padding: 20px 40px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      position: absolute;
+      top: 20px;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo i {
+      font-size: 2rem;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 50px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-links li a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--primary-gradient);
+      opacity: 0.1;
+      transition: left 0.4s ease;
+    }
+
+    .nav-links li a:hover {
+      color: var(--accent-purple);
+      transform: translateY(-2px);
+    }
+
+    .nav-links li a:hover::before {
+      left: 0;
+    }
+
+    .nav-links li a.active {
+      background: var(--primary-gradient);
+      color: white;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Futuristic Login Container */
+    .login-container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      padding: 50px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-lg);
+      width: 90%;
+      max-width: 480px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 100px;
+    }
+
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--primary-gradient);
+    }
+
+    .login-container::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200px;
+      height: 200px;
+      background: var(--secondary-gradient);
+      opacity: 0.05;
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .login-header {
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+
+    .login-header p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    /* Input Groups */
+    .input-group {
+      margin-bottom: 30px;
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .input-group label i {
+      color: var(--accent-purple);
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent-blue);
+      z-index: 1;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 18px 20px 18px 50px;
+      border: 2px solid #e2e8f0;
+      border-radius: var(--border-radius-sm);
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: white;
+      color: var(--text-primary);
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .input-group input::placeholder {
+      color: #94a3b8;
+    }
+
+    /* Login Button */
+    .login-btn {
+      width: 100%;
+      padding: 18px;
+      background: var(--primary-gradient);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--border-radius-sm);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      margin-top: 10px;
+    }
+
+    .login-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--secondary-gradient);
+      transition: left 0.4s ease;
+      z-index: -1;
+    }
+
+    .login-btn:hover::before {
+      left: 0;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .login-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .login-btn i {
+      margin-right: 10px;
+    }
+
+    /* Bottom Links */
+    .bottom-links {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bottom-links a {
+      color: var(--accent-purple);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: var(--border-radius-sm);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bottom-links a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--primary-gradient);
+      opacity: 0.1;
+      transition: left 0.3s ease;
+    }
+
+    .bottom-links a:hover::before {
+      left: 0;
+    }
+
+    .bottom-links a:hover {
+      color: var(--accent-blue);
+      transform: translateY(-2px);
+    }
+
+    /* Or Divider */
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 30px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+    }
+
+    .divider span {
+      padding: 0 20px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      background: white;
+    }
+
+    /* Social Login */
+    .social-login {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .social-btn {
+      padding: 14px;
+      border: 2px solid #e2e8f0;
+      border-radius: var(--border-radius-sm);
+      background: white;
+      color: var(--text-primary);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .social-btn:hover {
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-btn i {
+      font-size: 1.2rem;
+    }
+
+    .google-btn { color: #DB4437; }
+    .github-btn { color: #333; }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        padding: 15px;
+        position: relative;
+        top: 0;
+        margin-bottom: 30px;
+      }
+      
+      .nav-links {
+        margin-top: 15px;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .login-container {
+        padding: 30px;
+        margin-top: 80px;
+      }
+      
+      .login-header h2 {
+        font-size: 2rem;
+      }
+      
+      .social-login {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 25px 20px;
+        width: 95%;
+      }
+      
+      .nav-links {
+        gap: 10px;
+      }
+      
+      .nav-links li a {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+      
+      .bottom-links {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+      }
+      
+      .logo {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Loading Animation */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .loading {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="/" class="logo">
+      <i class="fas fa-brain"></i>
+      <span>IntrusionDetectAI</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/" class="active">Home</a></li>
+      <li><a href="/register">Register</a></li>
+      <li><a href="/about">About</a></li>
+      
+    </ul>
+  </nav>
+
+  <!-- Login Form -->
+  <div class="login-container">
+    <div class="login-header">
+      <h2>Welcome Back</h2>
+      <p>Sign in to continue to Intrusion Detection System</p>
+    </div>
+
+    <form method="POST">
+      <div class="input-group">
+        <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+        <div class="input-wrapper">
+          <i class="fas fa-user-circle"></i>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="password"><i class="fas fa-lock"></i> Password</label>
+        <div class="input-wrapper">
+          <i class="fas fa-key"></i>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="login-btn">
+        <i class="fas fa-sign-in-alt"></i> Sign In
+      </button>
+    </form>
+
+    <div class="divider">
+      <span>or continue with</span>
+    </div>
+
+    <div class="social-login">
+      <button type="button" class="social-btn google-btn">
+        <i class="fab fa-google"></i> Google
+      </button>
+      <button type="button" class="social-btn github-btn">
+        <i class="fab fa-github"></i> GitHub
+      </button>
+    </div>
+
+    <div class="bottom-links">
+      <a href="/register">
+        <i class="fas fa-user-plus"></i> Create an account
+      </a>
+      <a href="/forgot-password">
+        <i class="fas fa-question-circle"></i> Forgot password?
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Add subtle interactive effects
+    document.addEventListener('DOMContentLoaded', function() {
+      const inputs = document.querySelectorAll('input');
+      const loginBtn = document.querySelector('.login-btn');
+      
+      inputs.forEach(input => {
+        // Add focus animation
+        input.addEventListener('focus', function() {
+          this.parentElement.parentElement.classList.add('loading');
+        });
+        
+        input.addEventListener('blur', function() {
+          this.parentElement.parentElement.classList.remove('loading');
+        });
+      });
+      
+      // Button click effect
+      loginBtn.addEventListener('click', function(e) {
+        if (!this.closest('form').checkValidity()) {
+          this.classList.add('loading');
+          setTimeout(() => this.classList.remove('loading'), 1500);
+        }
+      });
+      
+      // Social button effects
+      const socialBtns = document.querySelectorAll('.social-btn');
+      socialBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          this.classList.add('loading');
+          setTimeout(() => {
+            this.classList.remove('loading');
+            alert('Social login would be implemented here');
+          }, 1000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

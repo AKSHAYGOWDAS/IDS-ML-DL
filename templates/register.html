@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auto updating intrusion detection system for vehicular network| Register</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --glass-bg: rgba(255, 255, 255, 0.95);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --text-primary: #2d3748;
+      --text-secondary: #4a5568;
+      --accent-blue: #4299e1;
+      --accent-purple: #9f7aea;
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+      --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --radius-lg: 20px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--text-primary);
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Modern Navigation */
+    nav {
+      width: 90%;
+      max-width: 1200px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--radius-lg);
+      padding: 1.2rem 2rem;
+      margin: 2rem auto;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid var(--glass-border);
+      position: sticky;
+      top: 1.5rem;
+      z-index: 100;
+      animation: slideDown 0.5s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-gradient);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent-purple);
+      background: rgba(159, 122, 234, 0.1);
+    }
+
+    nav ul li a.active {
+      color: var(--accent-purple);
+      background: rgba(159, 122, 234, 0.1);
+    }
+
+    /* Modern Register Card */
+    .register-container {
+      background: var(--glass-bg);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      padding: 3rem;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      width: 90%;
+      max-width: 480px;
+      margin: 2rem auto 4rem;
+      border: 1px solid var(--glass-border);
+      animation: floatIn 0.8s ease;
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .register-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .register-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .register-header p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      z-index: 1;
+    }
+
+    input {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      border: 2px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: white;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+    }
+
+    input::placeholder {
+      color: #a0aec0;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--accent-purple);
+      box-shadow: 0 0 0 3px rgba(159, 122, 234, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .password-requirements {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      padding-left: 0.5rem;
+    }
+
+    .requirement {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.25rem 0;
+    }
+
+    .requirement i {
+      font-size: 0.75rem;
+      color: #cbd5e0;
+    }
+
+    .requirement.met i {
+      color: #48bb78;
+    }
+
+    .register-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--primary-gradient);
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .register-btn:hover {
+      background: var(--secondary-gradient);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .register-btn:active {
+      transform: translateY(0);
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 2rem 0;
+      color: var(--text-secondary);
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e2e8f0;
+    }
+
+    .divider span {
+      padding: 0 1rem;
+      font-size: 0.9rem;
+    }
+
+    .bottom-links {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .bottom-links a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .bottom-links a:hover {
+      color: var(--accent-purple);
+      text-decoration: underline;
+    }
+
+    /* Floating elements for visual interest */
+    .floating-element {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      z-index: -1;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-element:nth-child(1) {
+      width: 100px;
+      height: 100px;
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .floating-element:nth-child(2) {
+      width: 150px;
+      height: 150px;
+      bottom: 15%;
+      right: 10%;
+      animation-delay: 2s;
+    }
+
+    .floating-element:nth-child(3) {
+      width: 80px;
+      height: 80px;
+      top: 50%;
+      left: 5%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem;
+      }
+      
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .register-container {
+        padding: 2rem;
+        margin: 1rem auto 3rem;
+      }
+      
+      .register-header h2 {
+        font-size: 1.75rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        width: 95%;
+        padding: 1rem;
+      }
+      
+      .register-container {
+        padding: 1.5rem;
+        width: 95%;
+      }
+      
+      nav ul li a {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+      }
+      
+      input {
+        padding: 0.875rem 0.875rem 0.875rem 2.5rem;
+      }
+    }
+
+    /* Form validation styles */
+    input:invalid:not(:focus):not(:placeholder-shown) {
+      border-color: #fc8181;
+    }
+
+    input:valid:not(:focus):not(:placeholder-shown) {
+      border-color: #68d391;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <!-- Floating background elements -->
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
+  <div class="floating-element"></div>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="/" class="logo">
+      <div class="logo-icon">
+        <i class="fas fa-brain"></i>
+      </div>
+      <span>IntrusionDetect AI</span>
+    </a>
+    <ul>
+      <li><a href="/" class="active">Home</a></li>
+      <li><a href="/login">Login</a></li>
+     
+      <li><a href="/about">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Register Form -->
+  <div class="register-container">
+    <div class="register-header">
+      <h2>Join Our Community</h2>
+      <p>Create your account to get started</p>
+    </div>
+
+    <form method="POST">
+      <div class="input-group">
+        <label for="name">Full Name</label>
+        <div class="input-wrapper">
+          <i class="fas fa-user input-icon"></i>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="John Doe"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="email">Email Address</label>
+        <div class="input-wrapper">
+          <i class="fas fa-envelope input-icon"></i>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="john@example.com"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <div class="input-wrapper">
+          <i class="fas fa-lock input-icon"></i>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="••••••••"
+            required
+            pattern="^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$"
+          />
+        </div>
+        <div class="password-requirements">
+          <div class="requirement" id="req-length">
+            <i class="fas fa-circle"></i>
+            <span>At least 8 characters</span>
+          </div>
+          <div class="requirement" id="req-number">
+            <i class="fas fa-circle"></i>
+            <span>Contains a number</span>
+          </div>
+          <div class="requirement" id="req-special">
+            <i class="fas fa-circle"></i>
+            <span>Contains a special character</span>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="register-btn">
+        <i class="fas fa-user-plus"></i> Create Account
+      </button>
+    </form>
+
+    <div class="divider">
+      <span>Already have an account?</span>
+    </div>
+
+    <div class="bottom-links">
+      <a href="/login">
+        <i class="fas fa-sign-in-alt"></i>
+        Sign in to your account
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Password validation feedback
+    const passwordInput = document.getElementById('password');
+    const requirements = {
+      length: document.getElementById('req-length'),
+      number: document.getElementById('req-number'),
+      special: document.getElementById('req-special')
+    };
+
+    passwordInput.addEventListener('input', function() {
+      const value = this.value;
+      
+      // Check length
+      if (value.length >= 8) {
+        requirements.length.classList.add('met');
+        requirements.length.querySelector('i').className = 'fas fa-check-circle';
+      } else {
+        requirements.length.classList.remove('met');
+        requirements.length.querySelector('i').className = 'fas fa-circle';
+      }
+      
+      // Check for number
+      if (/\d/.test(value)) {
+        requirements.number.classList.add('met');
+        requirements.number.querySelector('i').className = 'fas fa-check-circle';
+      } else {
+        requirements.number.classList.remove('met');
+        requirements.number.querySelector('i').className = 'fas fa-circle';
+      }
+      
+      // Check for special character
+      if (/[!@#$%^&*]/.test(value)) {
+        requirements.special.classList.add('met');
+        requirements.special.querySelector('i').className = 'fas fa-check-circle';
+      } else {
+        requirements.special.classList.remove('met');
+        requirements.special.querySelector('i').className = 'fas fa-circle';
+      }
+    });
+
+    // Form submission enhancement
+    document.querySelector('form').addEventListener('submit', function(e) {
+      const password = passwordInput.value;
+      const pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+      
+      if (!pattern.test(password)) {
+        e.preventDefault();
+        passwordInput.focus();
+        passwordInput.style.borderColor = '#fc8181';
+        alert('Please ensure your password meets all requirements.');
+      }
+    });
+  </script>
+</body>
+</html>

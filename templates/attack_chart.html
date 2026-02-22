@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Model Performance Analysis</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f172a;
+            margin: 0;
+            color: white;
+        }
+
+        .navbar {
+            background: #020617;
+            padding: 15px 30px;
+        }
+
+        .navbar a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #38bdf8;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .card h3 {
+            color: #4cc9f0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
+            background: white;
+            padding: 10px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <a href="{{ url_for('veremi_predict') }}">⬅ Back to Prediction</a>
+</div>
+
+<div class="container">
+
+    <h2>📊 Model Performance Analysis</h2>
+
+    <!-- ================= Stage 1 ================= -->
+    <div class="card">
+        <h3>Stage 1: Overall Model Performance</h3>
+        <img src="{{ url_for('static', filename=graphs.overall) }}">
+    </div>
+
+    <!-- ================= Stage 2 ================= -->
+    <div class="card">
+        <h3>Stage 2: Training Behaviour</h3>
+        <div class="grid-2">
+            <img src="static\graphs\loss.png">
+            <img src="static\graphs\accuracy.png">
+        </div>
+    </div>
+
+    <!-- ================= Stage 3 ================= -->
+    <div class="card">
+        <h3>Stage 3: Confusion Matrix Comparison</h3>
+        <div class="grid-2">
+            <img src="{{ url_for('static', filename=graphs.cnn_cm) }}">
+            <img src="{{ url_for('static', filename=graphs.svm_cm) }}">
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

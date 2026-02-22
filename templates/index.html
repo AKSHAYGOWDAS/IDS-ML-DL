@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CyberShield | Intrusion Detection</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --color-primary: #2563eb;
+    --color-primary-dark: #1d4ed8;
+    --color-secondary: #0f172a;
+    --color-accent: #ef4444;
+    --color-accent-hover: #dc2626;
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-dark: #0a0a0f;
+    --color-dark-light: #1e1e2d;
+    --color-gray: #94a3b8;
+    --color-light: #f8fafc;
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --gradient-primary: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    --gradient-accent: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-dark);
+    background-image: 
+      radial-gradient(at 40% 20%, rgba(37, 99, 235, 0.1) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, rgba(239, 68, 68, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, rgba(16, 185, 129, 0.05) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
+    color: var(--color-light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Animated background elements */
+  .bg-element {
+    position: fixed;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.1;
+  }
+  
+  .bg-element-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--gradient-primary);
+    top: -200px;
+    right: -100px;
+    animation: float 25s infinite ease-in-out;
+  }
+  
+  .bg-element-2 {
+    width: 300px;
+    height: 300px;
+    background: var(--gradient-accent);
+    bottom: -150px;
+    left: -100px;
+    animation: float 30s infinite ease-in-out reverse;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(30px, -30px) rotate(120deg); }
+    66% { transform: translate(-20px, 20px) rotate(240deg); }
+  }
+
+  /* Header and title */
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+    max-width: 900px;
+    width: 100%;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .logo-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--gradient-primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 800;
+    box-shadow: var(--shadow-md);
+  }
+
+  .logo-text {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+  }
+
+  h1 {
+    font-weight: 800;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+    background: linear-gradient(to right, #f8fafc, #cbd5e1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .tagline {
+    font-size: 1.25rem;
+    color: var(--color-gray);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+
+  /* Main content container */
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  /* Stats cards */
+  .stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .stat-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    width: 180px;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+  }
+
+  .stat-1 .stat-icon {
+    background: rgba(37, 99, 235, 0.2);
+    color: #60a5fa;
+  }
+
+  .stat-2 .stat-icon {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+  }
+
+  .stat-3 .stat-icon {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: var(--color-gray);
+  }
+
+  /* Navigation menu */
+  .menu-container {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000;
+  }
+
+  .menu-btn {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+  }
+
+  .menu-btn:hover {
+    background: rgba(30, 41, 59, 0.9);
+    transform: scale(1.05);
+  }
+
+  .menu-btn span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: var(--color-light);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .menu-btn.active {
+    background: rgba(37, 99, 235, 0.2);
+    border-color: rgba(37, 99, 235, 0.3);
+  }
+
+  .menu-btn.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .menu-btn.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-btn.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Navigation links */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-lg);
+    min-width: 280px;
+    z-index: 999;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .nav-header .logo-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .nav-header h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+
+  .nav-links a {
+    color: var(--color-light);
+    padding: 0.875rem 1.25rem;
+    margin: 0.25rem 0;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .nav-links a i {
+    width: 20px;
+    text-align: center;
+  }
+
+  .nav-links a:hover {
+    background: rgba(37, 99, 235, 0.15);
+    transform: translateX(5px);
+  }
+
+  .nav-links a:nth-child(2) { /* Login */
+    color: #60a5fa;
+  }
+  
+  .nav-links a:nth-child(3) { /* Register */
+    color: #34d399;
+  }
+  
+  .nav-links a:nth-child(4) { /* About */
+    color: #fbbf24;
+  }
+  
+  .nav-links a:nth-child(5) { /* Veremi Prediction */
+    color: #f87171;
+  }
+  
+  .nav-links a:nth-child(6) { /* IOT Prediction */
+    color: #a78bfa;
+  }
+
+  /* System status */
+  .system-status {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .status-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-success);
+    box-shadow: 0 0 10px var(--color-success);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .status-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .status-description {
+    color: var(--color-gray);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .status-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875rem;
+    color: var(--color-gray);
+  }
+
+  .footer {
+    margin-top: 3rem;
+    color: var(--color-gray);
+    font-size: 0.875rem;
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+    max-width: 600px;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    body {
+      padding: 1.5rem 1rem;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+    }
+    
+    .tagline {
+      font-size: 1.125rem;
+    }
+    
+    .menu-container {
+      top: 1.5rem;
+      right: 1.5rem;
+    }
+    
+    .stats-container {
+      gap: 1rem;
+    }
+    
+    .stat-card {
+      width: calc(50% - 1rem);
+      min-width: 140px;
+    }
+    
+    .system-status {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2rem;
+    }
+    
+    .logo-text {
+      font-size: 1.5rem;
+    }
+    
+    .stat-card {
+      width: 100%;
+    }
+    
+    .nav-links {
+      min-width: 260px;
+      right: -1rem;
+    }
+  }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Animated background elements -->
+  <div class="bg-element bg-element-1"></div>
+  <div class="bg-element bg-element-2"></div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon">C</div>
+      <div class="logo-text">CyberShield</div>
+    </div>
+    <h1>Auto updating intrusion detection system for vehicular network</h1>
+    <p class="tagline">Real-time threat detection and prevention powered by AI and machine learning algorithms to secure your network infrastructure.</p>
+  </div>
+
+  <!-- Main content -->
+  <div class="content-container">
+    <!-- Stats cards -->
+    <div class="stats-container">
+      <div class="stat-card stat-1">
+        <div class="stat-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="stat-number">99%</div>
+        <div class="stat-label">Detection Accuracy</div>
+      </div>
+      
+      <div class="stat-card stat-2">
+        <div class="stat-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <div class="stat-number">&lt;50ms</div>
+        <div class="stat-label">Response Time</div>
+      </div>
+      
+      <div class="stat-card stat-3">
+        <div class="stat-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="stat-number">20K+</div>
+        <div class="stat-label">Threats Blocked</div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+      <p>© 2025 CyberShield IDS. All rights reserved.</p>
+    </div>
+  </div>
+
+  <!-- Navigation menu -->
+  <div class="menu-container">
+    <button class="menu-btn" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    
+    <nav class="nav-links">
+      <div class="nav-header">
+        <div class="logo-icon">C</div>
+        <h3>CyberShield Menu</h3>
+      </div>
+      <a href="/login" aria-label="Login">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </a>
+      <a href="/register" aria-label="Register">
+        <i class="fas fa-user-plus"></i> Register
+      </a>
+      
+      <a href="/veremi_predict" aria-label="Predict">
+        <i class="fas fa-virus"></i> Veremi Prediction
+      </a>
+      <a href="/xgb_predict" aria-label="Predict">
+        <i class="fas fa-microchip"></i> IOT Prediction
+      </a>
+      
+    </nav>
+  </div>
+
+  <script>
+    const menuBtn = document.querySelector('.menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    // Toggle menu
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menuBtn.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.menu-container')) {
+        menuBtn.classList.remove('active');
+        navLinks.classList.remove('active');
+      }
+    });
+
+    // Close menu when pressing Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        menuBtn.classList.remove('active');
+        navLinks.classList.remove('active');
+      }
+    });
+
+    // Animate stats counter on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const statNumbers = document.querySelectorAll('.stat-number');
+      
+      statNumbers.forEach(stat => {
+        const finalValue = stat.textContent;
+        let currentValue = 0;
+        
+        // Reset for animation
+        if (finalValue.includes('%')) {
+          stat.textContent = '0%';
+        } else if (finalValue.includes('ms')) {
+          stat.textContent = '0ms';
+        } else if (finalValue.includes('K+')) {
+          stat.textContent = '0+';
+        } else {
+          stat.textContent = '0';
+        }
+        
+        // Animate after a short delay
+        setTimeout(() => {
+          const increment = finalValue.includes('K+') ? 100 : 1;
+          const target = finalValue.includes('K+') ? 10000 : 
+                         finalValue.includes('%') ? 99.8 : 
+                         finalValue.includes('ms') ? 50 : 10000;
+          
+          const timer = setInterval(() => {
+            currentValue += increment;
+            
+            if (finalValue.includes('%')) {
+              stat.textContent = `${Math.min(currentValue, 99.8).toFixed(1)}%`;
+            } else if (finalValue.includes('ms')) {
+              stat.textContent = `<${Math.min(currentValue, 50)}ms`;
+            } else if (finalValue.includes('K+')) {
+              if (currentValue >= 10000) {
+                stat.textContent = '10K+';
+              } else {
+                stat.textContent = `${currentValue}+`;
+              }
+            }
+            
+            if (currentValue >= target) {
+              clearInterval(timer);
+              stat.textContent = finalValue;
+            }
+          }, 20);
+        }, 500);
+      });
+    });
+  </script>
+
+</body>
+</html>
